@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.MemberDao;
+import com.example.demo.util.CheckRR;
 import com.example.demo.vo.MemberVo;
 
 @Controller
@@ -31,8 +32,6 @@ public class MemberController {
 	@PostMapping("/insertMember")
 	public ModelAndView insertSubmit(MemberVo m) {
 		ModelAndView mav = new ModelAndView("redirect:/list");
-//		ModelAndView mav = new ModelAndView();
-//		System.out.println(m);
 		int re = dao.insert(m);
 		mav.addObject("re", re);
 		return mav;
@@ -46,7 +45,7 @@ public class MemberController {
 		return n+"";
 	}
 	
-	//주민번호 확인
+	//본인인증폼
 	@GetMapping("/checkMember")
 	public void checkForm() {
 		
@@ -58,6 +57,24 @@ public class MemberController {
 		mav.addObject("m", m);
 		return mav;
 	}
+	
+	@PostMapping("/checkRR")
+	@ResponseBody
+	public String checkRR(@RequestParam HashMap map) {
+		System.out.println(map);
+		String rr_no = (String)map.get("rr_no");
+		System.out.println(rr_no);
+//		String re = CheckRR.check(rr_no);
+//		System.out.println(re);
+//		return re;
+		return "x";
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

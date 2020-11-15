@@ -162,13 +162,17 @@
 	padding-top: 30px;
 }
 
+#tel, #name, #rr_no{
+	border: none;
+}
+
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
 $(function(){
-
+	var id1;
 	//아이디 중복확인을 했는지 알기위한 변수
 	var checkId = true;
 
@@ -179,16 +183,20 @@ $(function(){
 			alert("아이디를 입력해주세요.");
 			return false;
 		}
+
+		if (id1 != $("#id").val()){
+			checkId = true;
+		}
 		
 		if (checkId){
 			alert("아이디 중복확인을 해주세요.");
 			return false;
 		}
 		
-		var tel1 = $("#tel1").val();
-		var tel2 = $("#tel2").val();
-		var tel3 = $("#tel3").val();
-		$("#tel").val(tel1+tel2+tel3);
+// 		var tel1 = $("#tel1").val();
+// 		var tel2 = $("#tel2").val();
+// 		var tel3 = $("#tel3").val();
+// 		$("#tel").val(tel1+tel2+tel3);
 		
 		var email1 = $("#email1").val();
 		var email2 = $("#email2").val();
@@ -244,6 +252,7 @@ $(function(){
 				} else{
 					alert("사용 가능한 아이디입니다.");
 					checkId = false;
+					id1 = $("#id").val();
 				}
 		} });
 
@@ -275,7 +284,7 @@ $(function(){
   				<table class="table">
   					<tr>
   						<th>이름</th>
-  						<td><input type="text" id="name" name="name" class="input" value="${m.name }"></td>
+  						<td><input type="text" id="name" name="name" class="input" value="${m.name }" readonly="readonly"></td>
   					</tr>
   					<tr>
   						<th>고객아이디</th>
@@ -294,15 +303,15 @@ $(function(){
   					</tr>
   					<tr>
   						<th>주민등록번호</th>
-  						<td><input type="text" id="rr_no" name="rr_no" class="input" value="${m.rr_no }"></td>
+  						<td><input type="text" id="rr_no" name="rr_no" class="input" value="${m.rr_no }" required="required" readonly="readonly"></td>
   					</tr>
   					<tr>
   						<th>연락처</th>
   						<td>  							
-  							<input type="text" id="tel1" name="tel1" placeholder="000" class="tel" value="${m.tel1 }"> - 
-  							<input type="text" id="tel2" name="tel2" placeholder="0000" class="tel" value="${m.tel2 }"> - 
-  							<input type="text" id="tel3" name="tel3" placeholder="0000" class="tel" value="${m.tel3 }">
-  							<input type="hidden" id="tel" name="tel" class="tel">
+<%--   							<input type="text" id="tel1" name="tel1" placeholder="000" class="tel" value="${m.tel1 }"> -  --%>
+<%--   							<input type="text" id="tel2" name="tel2" placeholder="0000" class="tel" value="${m.tel2 }"> -  --%>
+<%--   							<input type="text" id="tel3" name="tel3" placeholder="0000" class="tel" value="${m.tel3 }"> --%>
+  							<input type="text" id="tel" name="tel" class="input" value="${m.tel }" readonly="readonly">
   						</td>
   					</tr>
   					<tr>
