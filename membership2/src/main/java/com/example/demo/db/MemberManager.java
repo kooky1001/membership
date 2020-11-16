@@ -44,6 +44,15 @@ public class MemberManager {
 		return n;
 	}
 	
+	//주민번호 중복확인
+	public static int checkRR(HashMap map) {
+		int n = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+		n = session.selectOne("member.checkRR", map);
+		session.close();
+		return n;
+	}
+	
 	//로그인
 //	public static MemberVo selectMember(String id) {
 //		MemberVo m = null;

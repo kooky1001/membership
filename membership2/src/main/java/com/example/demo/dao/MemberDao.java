@@ -17,4 +17,8 @@ public class MemberDao {
 	public int checkId(HashMap map) {
 		return MemberManager.checkId(map);
 	}
+	
+	public int checkRR(HashMap map) {
+		return MemberManager.checkRR(map);
+	}
 }

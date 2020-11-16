@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.MemberDao;
+import com.example.demo.sms.BitSms;
 import com.example.demo.util.CheckRR;
 import com.example.demo.vo.MemberVo;
 
@@ -60,17 +62,31 @@ public class MemberController {
 	
 	@PostMapping("/checkRR")
 	@ResponseBody
-	public String checkRR(@RequestParam HashMap map) {
+	public HashMap checkRR(@RequestParam HashMap map) {
 		System.out.println(map);
-		String rr_no = (String)map.get("rr_no");
-		System.out.println(rr_no);
-//		String re = CheckRR.check(rr_no);
-//		System.out.println(re);
-//		return re;
-		return "x";
+		String rr_check = (String)map.get("rr_check");
+		int already = dao.checkRR(map);
+		
+		String re = CheckRR.check(rr_check);
+		HashMap data = new HashMap<>();
+		data.put("already",	already);
+		data.put("re", re);
+		return data;
 	}
 	
-	
+	@PostMapping("/checkTel")
+	@ResponseBody
+	public HashMap checkTel(@RequestParam HashMap map) {
+		String to = (String)map.get("tel");
+		Random r = new Random();
+		String msg  =  r.nextInt(10) +""+r.nextInt(10)+""+r.nextInt(10)+""+r.nextInt(10)+""+r.nextInt(10)+""+r.nextInt(10);
+		System.out.println(msg);
+		String send = BitSms.sendMsg(to, msg);
+		HashMap data = new HashMap<>();
+		data.put("send", send);
+		data.put("msg", msg);
+		return data;
+	}
 	
 	
 	
@@ -85,5 +101,8 @@ public class MemberController {
 	
 	@GetMapping("/list")
 	public void list() {
+	}
+	@GetMapping("/join-allow")
+	public void join() {
 	}
 }

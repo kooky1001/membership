@@ -171,6 +171,37 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
+
+var checkP = true;
+
+	function checkPassword(password){		//비밀번호 문자열 체크 
+		//자리수 부족
+		if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{10,15}$/.test(password)){
+			alert('비밀번호는 숫자와 영문자, 특수문자 조합으로 10~15자리를 사용해야 합니다.');
+			return false;
+		}
+		// 올바른 조합인지
+		var specail = password.search(/[!@#$%^*+=-]/g);
+		var checkNumber = password.search(/[0-9]/g);
+		var checkEnglish = password.search(/[a-z]/ig);
+		if(checkNumber <0 || checkEnglish <0 || specail <0){
+			alert("비밀번호는 숫자와 영문자, 특수문자를 혼용하여야 합니다.");
+			return false;
+		}
+		//연속된 문자
+		if(/(\w)\1\1\1/.test(password)){
+			alert('비밀번호는 같은 문자를 연속으로 4번 이상 사용하실 수 없습니다.');
+			return false;
+		}
+
+		checkP = false;
+		
+		/*if(password.search(id) > -1){
+			alert("비밀번호에 아이디가 포함되었습니다.");
+			return false;
+			}*/
+	}
+	
 $(function(){
 	var id1;
 	//아이디 중복확인을 했는지 알기위한 변수
@@ -178,25 +209,23 @@ $(function(){
 
 	//가입버튼을 눌렀을때 적용할 기능
 	$("#btnJoin").click(function(){
+		//아이디를 입력하지 않았을때
 		if($("#id").val() == ""){
 			checkId = true;
 			alert("아이디를 입력해주세요.");
 			return false;
 		}
 
+		//아이디 중복체크 후에 아이디를 변경했을때 동작하지 않도록 하기위한 조건문
 		if (id1 != $("#id").val()){
 			checkId = true;
 		}
-		
+
+		//아이디 중복확인을 했는지 여부확인
 		if (checkId){
 			alert("아이디 중복확인을 해주세요.");
 			return false;
 		}
-		
-// 		var tel1 = $("#tel1").val();
-// 		var tel2 = $("#tel2").val();
-// 		var tel3 = $("#tel3").val();
-// 		$("#tel").val(tel1+tel2+tel3);
 		
 		var email1 = $("#email1").val();
 		var email2 = $("#email2").val();
@@ -206,9 +235,18 @@ $(function(){
 		var addr2 = $("#addr2").val();
 		var addr3 = $("#addr3").val();
 		$("#addr").val(addr1+" "+addr2+" "+addr3);
+
 		
 		var pwd1 = $("#pwd1").val();
 		var pwd2 = $("#pwd2").val();
+		checkPassword(pwd1);
+
+		//비밀번호 정규식 적용여부
+		if(checkP){
+			return false;
+		}
+
+		//비번확인 같은지 체크
 		if(pwd1 != pwd2){
 			alert("비밀번호를 확인해주세요.")
 			return false;
@@ -257,6 +295,14 @@ $(function(){
 		} });
 
 	});
+
+	$("#name_show").html($("#name").val());
+	$("#tel_show").html($("#tel").val());
+
+	var rr_show = $("#rr_no").val();
+	rr_show = rr_show.substring(0,8)+"******";
+	console.log(rr_show);
+	$("#rr_show").html(rr_show);
 });
 </script>
 </head>
@@ -279,12 +325,13 @@ $(function(){
   		
   		<form id="form" action="/insertMember" method="post">
   		<div class="essential">
-  			<h3 class="ptitle">필수입력사항</h2>
+  			<h3 class="ptitle">필수입력사항</h3>
   			<div>
   				<table class="table">
   					<tr>
   						<th>이름</th>
-  						<td><input type="text" id="name" name="name" class="input" value="${m.name }" readonly="readonly"></td>
+  						<td><strong id="name_show"></strong>
+  						<input type="hidden" id="name" name="name" class="input" value="${m.name }" readonly="readonly"></td>
   					</tr>
   					<tr>
   						<th>고객아이디</th>
@@ -294,24 +341,22 @@ $(function(){
   					</tr>
   					<tr>
   						<th>비밀번호</th>
-  						<td><input type="password" id="pwd1" name="pwd1" class="input" minlength="8" maxlength="20"><br><span>* 8~20자의 영문 대소문자, 숫자, 특수문자 중 2종류 이상 조합</span></td>
+  						<td><input type="password" id="pwd1" name="pwd1" class="input" minlength="10" maxlength="15" required="required"><br><span>* 10~15자의 숫자와 영문자, 특수문자 조합</span></td>
   					</tr>
   					<tr>
   						<th>비밀번호 확인</th>
-  						<td><input type="password" id="pwd2" name="pwd2" class="input" minlength="8" maxlength="20"></td>
+  						<td><input type="password" id="pwd2" name="pwd2" class="input" minlength="10" maxlength="15"></td>
   						<td><input type="hidden" id="pwd" name="pwd" class="input"></td>
   					</tr>
   					<tr>
   						<th>주민등록번호</th>
-  						<td><input type="text" id="rr_no" name="rr_no" class="input" value="${m.rr_no }" required="required" readonly="readonly"></td>
+  						<td><strong id="rr_show"></strong><input type="hidden" id="rr_no" name="rr_no" class="input" value="${m.rr_no }" required="required" readonly="readonly"></td>
   					</tr>
   					<tr>
   						<th>연락처</th>
-  						<td>  							
-<%--   							<input type="text" id="tel1" name="tel1" placeholder="000" class="tel" value="${m.tel1 }"> -  --%>
-<%--   							<input type="text" id="tel2" name="tel2" placeholder="0000" class="tel" value="${m.tel2 }"> -  --%>
-<%--   							<input type="text" id="tel3" name="tel3" placeholder="0000" class="tel" value="${m.tel3 }"> --%>
-  							<input type="text" id="tel" name="tel" class="input" value="${m.tel }" readonly="readonly">
+  						<td>
+  							<strong id="tel_show"></strong>							
+  							<input type="hidden" id="tel" name="tel" class="input" value="${m.tel }" readonly="readonly">
   						</td>
   					</tr>
   					<tr>
@@ -345,7 +390,6 @@ $(function(){
   			<h3 class="ptitle">선택정보 입력</h3>
   			<div>
   				<table class="table">
-  					<div class="test">
   					<tr>
   						<th>주소</th>
   						<td><input type="text" name="addr1" id="addr1" readonly="readonly"><button type="button" id="btnAddr">우편번호 검색</button><br>
@@ -354,7 +398,6 @@ $(function(){
   							<input type="hidden" name="addr" id="addr">
   						</td>
   					</tr>
-  					</div>
   					<tr>
   						<th>메일수신여부</th>
   						<td><input type="radio" name="emailReceive" value="o" checked="checked">동의 
