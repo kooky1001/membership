@@ -9,6 +9,7 @@
 	* {
 	  box-sizing: border-box;
 	  font-family: "맑은 고딕";
+	  color: #5D5D5D;
 	}
 	
 	.mypage_menu{
@@ -22,131 +23,7 @@
 	
 	}
 	
-	
-	
-	.mypage_top{
-		text-align : center;
-		justify-content: center;
-		display: flex;
-		z-index: 4px;
-		border-top : 4px solid #5D5D5D;
-	
-	}
-	.mypage_top div{
-		color: #747474;
-		font-size: 14px;
-		z-index: 2px;
-		font-weight: bold;
-	}
-	
-	
-	
-	#top_menu_1{
-		border: 1px solid #94CCC4;
-		border-top : 6px solid #5D5D5D;
-		width: 273px;
-		height: 45px;
-		z-index: 0px;
-	}
-	
-	#top_menu_1 p{
-		margin: 0px;
-		margin-top: 10px;
-	}
-	
-	#top_menu_2{
-		
-		border: 1px solid #94CCC4;
-		border-top : 6px solid #5D5D5D;
-		width: 273px;
-		height: 45px;
-		z-index: 0px;
-	}
-	#top_menu_2 p{
-		margin: 0px;
-		margin-top: 10px;
-	}
-	
-	#top_menu_3{
-		
-		border: 1px solid #94CCC4;
-		border-top : 6px solid #5D5D5D;
-		width: 273px;
-		height: 45px;
-		z-index: 0px;
-	}
-	#top_menu_3 p{
-		margin: 0px;
-		margin-top: 10px;
-	}
-	
-	#top_menu_1:hover{
-		color: #ffffff;
-		background-color: #94CCC4;
-	}
-	
-	#top_menu_2:hover{
-		color: #ffffff;
-		background-color: #94CCC4;
-	}
-	
-	#top_menu_3:hover{
-		color: #ffffff;
-		background-color: #94CCC4;
-	}
-	
-	
-	.mypage_under{
-		text-align : center;
-		justify-content: center;
-		display: flex;
-	
-	}
-	
-	.mypage_under div{
-		color: #747474;
-		font-size: 14px;
-		font-weight: bold;
-	}
-	
-	#under_menu_1{
-		margin : 0px;
-		padding-top: 10px;
-		border: 1px solid #94CCC4;
-		width: 273px;
-		height: 45px;
-	}
-	
-	#under_menu_2{
-		margin : 0px;
-		padding-top: 10px;
-		border: 1px solid #94CCC4;
-		width: 273px;
-		height: 45px;
-	}
-	
-	#under_menu_3{
-		margin : 0px;
-		padding-top: 10px;
-		border: 1px solid #94CCC4;
-		width: 273px;
-		height: 45px;
-	}
-	
-	#under_menu_1:hover{
-		color: #ffffff;
-		background-color: #94CCC4;
-	}
-	
-	#under_menu_2:hover{
-		color: #ffffff;
-		background-color: #94CCC4;
-	}
-	
-	#under_menu_3:hover{
-		color: #ffffff;
-		background-color: #94CCC4;
-	}
+
 	
 	#mypage_title{
 		text-align: center;
@@ -155,57 +32,7 @@
 		
 			
 	}
-	
-	#mypage_box{
-		width: 816px;
-		height: 80px;
-		background-color: #FCF8F2;
-		z-index: 0px;
-		text-align: center; 
-		display: flex;
-		justify-content: center;
-		padding-top: 25px;
-		   
-   }
-   
-   #mypage_box_div1{				
-		height: 30px;
-		width: 150px;
-		text-align: center;
-		color : #94CCC4;
-     	font-weight: bold;
-     	border-bottom: 3px solid #94CCC4;
-		
-   }
-   
-   #mypage_box_div2{				
-		height: 30px;
-		width: 150px;
-		color: #5D5D5D;
-		text-align: center;
-   }
-   
-   #mypage_box_empty{
-		height: 30px;
-		border-right: 2px solid #EAEAEA;
-		margin-left: 10px;
-		margin-right: 10px;
-   
-   }
-   
-   #mypage_box_div1:hover{
-		color : #94CCC4;
-     	font-weight: bold;
-     	border-bottom: 3px solid #94CCC4;
-   }
-   
-   #mypage_box_div2:hover{
-		color : #94CCC4;
-     	font-weight: bold;
-     	border-bottom: 3px solid #94CCC4;
-   }
-   
-   
+
 		
 	.mypage_detail_under{
 		width: 817px;
@@ -217,43 +44,33 @@
 	
 	#mypage_title_sub{
 		width: 760px;
-		height: 280px;
+		height: 350px;
 		border: 1px solid #EAEAEA;
 		border-top: 3px solid #94CCC4;
 		border-bottom: 3px solid #94CCC4;
+		padding-left: 5%;
+		padding-right: 5%;
+		display: table;
 	}
 	
-	#mypage_title_sub h3{
+	.mypage_detail_under h3{
 		text-align: center;
 		color: #5D5D5D;
 		font-weight: bold;
-		padding-top: 55px;
+		padding-top: 30px;
 		padding-bottom: 30px;
+		padding-right: 50px;
 	
 	}
 	
-	#mypage_title_sub_span1{
-		margin-left: 250px;
-		color: #5D5D5D;
-		
-		
-			
-	}
-	
-	#mypage_title_sub_span2{
-		margin-left: 80px;
-		color: #5D5D5D;
-			
-	}
-	
-	#mypage_title_sub_span3{
-		margin-left: 250px;
-		color: #5D5D5D;
-			
-	}
 	
 	.pw_input{
 		width: 200px;
+		height: 40px;
+		border: 1px solid #EAEAEA;
+	}
+	.tel_input{
+		width: 100px;
 		height: 40px;
 		border: 1px solid #EAEAEA;
 	}
@@ -264,7 +81,7 @@
 		height: 150px;
 	}
 	
-	#mypage_title_btn1{
+	.mypage_title_btn1{
 		border-radius: 10px;
 		width: 150px;
 		height: 35px;
@@ -275,7 +92,18 @@
 		margin-top: 55px;
 	}
 	
-	#mypage_title_btn2{
+	.mypage_title_btn3{
+		border-radius: 10px;
+		width: 120px;
+		height: 35px;
+		border: 1px solid #94CCC4;
+		background-color: #94CCC4;
+		color: #ffffff;
+		font-weight: bold;
+		margin-left: 30px;
+	}
+	
+	.mypage_title_btn2{
 		border-radius: 10px;
 		width: 150px;
 		height: 35px;
@@ -296,25 +124,7 @@
 		/*border: 1px solid #bcbcbc;*/
 	}
 	
-	  
 
-	body {
-	  
-	}
-	
-	a{
-		text-decoration: none;
-	}
-	
-	/* Style the header */
-	/*
-	.header {
-	  background-color: #f1f1f1;
-	  padding: 30px;
-	  text-align: center;
-	  font-size: 35px;
-	}
-	*/
 	
 	/* Create three unequal columns that floats next to each other */
 	.column {
@@ -373,6 +183,26 @@
 	    width: 100%;
 	  }  
 	  
+	}
+	
+	.tr{
+		display: table-row;
+	}
+	
+	#mypage_title_sub span{
+		display: table-cell;
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+	#mypage_title_sub strong{
+		display: table-cell;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+	
+	kkk{
+		font-size: 13px;
+		color: #94CCC4;
 	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -475,17 +305,49 @@ $(function(){
 		  			<h2>본인 인증</h2>
 		  		</div>
 		  	<div class="mypage_detail_under">
+		  			<h3>회원님의 개인정보보호와 더욱 안정된 서비스를 위해 최선을 다하겠습니다.</h3>
+				<form action="/checkMember" method="post">
 		  		<div id="mypage_title_sub">
-		  			<h3>개인정보를 안전하게 보호하기 위해 비밀번호를 재확인 합니다.</h3>
-		  			<span id="mypage_title_sub_span1">아이디</span>
-		  			<span id="mypage_title_sub_span2"> login ID</span><br><br>
-		  			<span id="mypage_title_sub_span3">비밀번호</span>
-		  			<span><input type="text" class="pw_input"></span>
+		  			<div class="tr">
+		  			<strong>이름</strong>
+		  			<span><input type="text" name="name" id="name" required="required" class="pw_input">
+		  			<br><kkk>※ 인증 후 자동으로 이름이 입력됩니다.</kkk>
+		  			</span>
+		  			</div>
+		  			<div class="tr">
+		  			<strong>주민등록번호</strong>
+		  			<span>
+		  			<input type="text" name="rr_no1" id="rr_no1" maxlength="6" minlength="6" required="required" class="pw_input"> - 
+		  			<input type="password" name="rr_no2" id="rr_no2" maxlength="7" minlength="7" required="required" class="pw_input">
+					<input type="hidden" name="rr_no" id="rr_no"><br>
+					<kkk>※ 병원 환자정보 확인을 위해 정확히 입력해 주십시오.</kkk>
+		  			</span>
+		  			</div>
+		  			<div class="tr">
+		  			<strong>전화번호</strong>
+		  			<span>		  			
+		  			<select id="tel1" name="tel1" class="tel_input">
+						<option value="010" selected="selected">010</option>
+						<option value="011">011</option>
+						<option value="016">016</option>
+						<option value="019">019</option>
+					</select> - 
+					<input type="text" id="tel2" name="tel2" placeholder="0000" class="tel_input"> - 
+				  	<input type="text" id="tel3" name="tel3" placeholder="0000" class="tel_input">
+				  	<input type="hidden" id="tel" name="tel" class="tel_input">
+		  			<button id="btnTel" type="button" class="mypage_title_btn3">인증번호 받기</button>
+		  			</span>
+		  			</div>
+		  			<div class="tr">
+		  			<strong>인증번호</strong>
+		  			<span><input type="text" name="checkTel" id="checkTel" class="pw_input"></span>
+		  			</div>
 		  		</div>
 		  		<div id="mypage_title_btn">
-		  			<button id="mypage_title_btn1"> <a href="/myPage_7">확인</a></button>
-		  			<button id="mypage_title_btn2">취소</button>
+		  			<button class="mypage_title_btn1" id="btnSubmit">확인</button>
+		  			<button class="mypage_title_btn2" type="re">취소</button>
 		  		</div>
+			</form>
 		  		  	
 		  	</div>
 		  	</div>	
@@ -496,23 +358,5 @@ $(function(){
 	</div>
 
 
-<form action="/checkMember" method="post">
-	이름 : <input type="text" name="name" id="name" required="required"><br>
-	주민번호 : <input type="text" name="rr_no1" id="rr_no1" maxlength="6" minlength="6" required="required">-<input type="password" name="rr_no2" id="rr_no2" maxlength="7" minlength="7" required="required">
-	<input type="hidden" name="rr_no" id="rr_no"><br>
-	전화번호 :  
-	<select id="tel1" name="tel1" >
-		<option value="010" selected="selected">010</option>
-		<option value="010">011</option>
-		<option value="010">016</option>
-		<option value="010">019</option>
-	</select> - 
-  	<input type="text" id="tel2" name="tel2" placeholder="0000" class="tel"> - 
-  	<input type="text" id="tel3" name="tel3" placeholder="0000" class="tel">
-  	<input type="hidden" id="tel" name="tel" class="tel">
-	<button id="btnTel" type="button">전화번호 확인</button><br>
-	인증번호 : <input type="text" name="checkTel" id="checkTel"><br>
-	<button id="btnSubmit">확인</button>
-</form>
 </body>
 </html>

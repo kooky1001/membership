@@ -70,6 +70,7 @@
 	padding-top: 20px;
 	margin-left: 0px;
 	border-bottom: 1px solid #ddd;
+	width: 70%;
 }
 
 .tel {
@@ -79,6 +80,11 @@
 .table .input {
 	height: 30px;
  	width: 230px; 
+}
+
+.select {
+	height: 30px;
+	width: 150px;
 }
 
 .table button {
@@ -363,7 +369,7 @@ $(function(){
   						<th>이메일</th>
   						<td>
   							<input type="text" id="email1" name="email1" class="input"> @ 
-  							<select name="email2" id="email2">
+  							<select name="email2" id="email2" class="select">
 								<option value="1">직접입력</option>
 								<option value="naver.com" selected>naver.com</option>
 								<option value="gmail.com">gmail.com</option>
