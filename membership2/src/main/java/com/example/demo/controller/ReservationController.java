@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dao.ReservationDao;
 import com.example.demo.vo.DepartmentVo;
+import com.example.demo.vo.Doc_ScheduleVo;
 import com.example.demo.vo.DoctorVo;
 
 @Controller
@@ -34,10 +35,17 @@ public class ReservationController {
 	
 	@PostMapping("/resDoc")
 	@ResponseBody
-	public List resDoc(@RequestParam HashMap map) {
+	public List<DoctorVo> resDoc(@RequestParam HashMap map) {
 //		System.out.println(map);
 		List<DoctorVo> list = dao.findByNoDoc(map);
 //		System.out.println(list);
+		return list;
+	}
+	
+	@PostMapping("/resSche")
+	@ResponseBody
+	public List<Doc_ScheduleVo> resSche(@RequestParam HashMap map) {
+		List<Doc_ScheduleVo> list = dao.findByNoSche(map);
 		return list;
 	}
 }

@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.DepartmentVo;
+import com.example.demo.vo.Doc_ScheduleVo;
 import com.example.demo.vo.DoctorVo;
 
 public class ReservationManager {
@@ -42,6 +43,15 @@ public class ReservationManager {
 		List<DoctorVo> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		list = session.selectList("res.selectByNoDoc", map);
+		session.close();
+		return list;
+	}
+	
+	//의료진 스케쥴 불러오기
+	public static List<Doc_ScheduleVo> findByNoSche(HashMap map) {
+		List<Doc_ScheduleVo> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		list = session.selectList("res.selectByNoSche", map);
 		session.close();
 		return list;
 	}

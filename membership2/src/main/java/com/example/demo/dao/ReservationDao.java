@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.ReservationManager;
 import com.example.demo.vo.DepartmentVo;
+import com.example.demo.vo.Doc_ScheduleVo;
 import com.example.demo.vo.DoctorVo;
 
 @Repository
@@ -20,5 +21,8 @@ public class ReservationDao {
 		return ReservationManager.findByNoDoc(map);
 	}
 	
+	public List<Doc_ScheduleVo> findByNoSche(HashMap map){
+		return ReservationManager.findByNoSche(map);
+	}
 	
 }

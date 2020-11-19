@@ -544,8 +544,11 @@ function showCalendar(y, m) {
 }
 
 $(function(){
+	
 	$(document).on("click",".res_dept",function(){
 		var dept_no = $(this).val();
+		var dname = $(this).attr("dname");
+		$("#deptname").html(dname);
 		$("#res_doc").html("");
 		$.ajax({
 		    url: "/resDoc",
@@ -562,29 +565,46 @@ $(function(){
 					
 					var doc_info = $("<div></div>").addClass("doc_info");
 					var name = $("<h3></h3>").html(doc.doc_name);
-					var major = $("<p></p>").html(doc.major);
-
+					var major = $("<p></p>").html(doc.major+" "+doc.position);
+					var sc1 = $("<p></p>").append($("<span></span>").html("오전"));
+					var sc2 = $("<p></p>").append($("<span></span>").html("오후"));
 					var btn = $("<button></button>").html("진료예약").addClass("r_btn");
+					$(btn).attr({doc_no:doc.doc_no, doc_name:doc.doc_name});
 
-					$(doc_info).append(name,major,btn);
+					var doc_no = doc.doc_no;
+					$.ajax({
+					    url: "/resSche",
+					    method: "POST",
+					    dataType: "json",
+					    async: false,
+					    data: {doc_no:doc_no},
+					    success: function(data) {
+						    for(var sche of data){
+								if(sche.am_pm == "오전"){
+									$(sc1).append(" "+sche.workday);
+								}
+								if(sche.am_pm == "오후"){
+									$(sc2).append(" "+sche.workday);
+								}
+							}
+					    }
+					});
+
+					
+					$(doc_info).append(name,major,sc1,sc2,btn);
 
 					$(li).append(doc_img,doc_info)
 					
 					$("#res_doc").append(li);
 				}
-
-// 		    	<li>
-// 				<div class="doc_img"><img src="./image/doctor.png"></div>
-// 				<div class="doc_info">
-// 					<h3>김형규 교수</h3>
-// 					<p>내과</p>
-// 					<p><span>오전</span> 월,수,금,토</p>
-// 					<p><span>오후</span> 화,수,금</p>
-// 					<button class="r_btn">진료예약</button>
-// 				</div>
-// 			</li>
 		    }
 		});
+	});
+
+	$(document).on("click",".r_btn",function(){
+		var doc_no = $(this).attr("doc_no");
+		var doc_name = $(this).attr("doc_name");
+		$("#docname").html(doc_name);
 	});
 		
 	
@@ -592,7 +612,7 @@ $(function(){
 		$("#deptul").html("");
 		for(let de of data){
 			var li = $("<li></li>");
-			var input = $("<input>").val(de.dept_no).attr({type:"radio",name:"dept_no"}).addClass("res_dept");
+			var input = $("<input>").val(de.dept_no).attr({type:"radio",name:"dept_no",dname:de.dept_name}).addClass("res_dept");
 			var text = $("<span></span>").html(" "+de.dept_name);
 			$(li).append(input,text);
 			$("#deptul").append(li);
@@ -657,9 +677,9 @@ $(function(){
 			<button class="m2_2btn_1">환자정보확인</button>
 			<button>최근예약</button>
 			</div>
-			<p>병원/진료과 : </p>
-			<p>의료진 : </p>
-			<p>진료일시 : </p>
+			<p>진료과 : <span id="deptname"></span></p>
+			<p>의료진 : <span id="docname"></span></p>
+			<p>진료일시 : <span id="resdate"></span></p>
 			<p></p>
 		</div>
 	</div>
@@ -669,66 +689,66 @@ $(function(){
 			<h3>의료진 선택</h3>
 			<div class="doc_box">
 				<ul id="res_doc">
-					<li>
-						<div class="doc_img"><img src="./image/doctor.png"></div>
-						<div class="doc_info">
-							<h3>김형규 교수</h3>
-							<p>내과</p>
-							<p><span>오전</span> 월,수,금,토</p>
-							<p><span>오후</span> 화,수,금</p>
-							<button class="r_btn">진료예약</button>
-						</div>
-					</li>
-					<li>
-						<div class="doc_img"><img src="doctor.png"></div>
-						<div class="doc_info">
-							<h3>장미연 교수</h3>
-							<p>외과</p>
-							<p><span>오전</span> 수,토</p>
-							<p><span>오후</span> 월,수,금</p>
-							<button class="r_btn">진료예약</button>
-						</div>
-					</li>
-					<li>
-						<div class="doc_img"><img src="doctor.png"></div>
-						<div class="doc_info">
-							<h3>이국영 교수</h3>
-							<p>피부과</p>
-							<p><span>오전</span> 토,일</p>
-							<p><span>오후</span> 월,화</p>
-							<button class="r_btn">진료예약</button>
-						</div>
-					</li>
-					<li>
-						<div class="doc_img"><img src="doctor.png"></div>
-						<div class="doc_info">
-							<h3>은지원 교수</h3>
-							<p>치과</p>
-							<p><span>오전</span> 화,수</p>
-							<p><span>오후</span> 금,토</p>
-							<button class="r_btn">진료예약</button>
-						</div>
-					</li>
-					<li>
-						<div class="doc_img"><img src="doctor.png"></div>
-						<div class="doc_info">
-							<h3>추승연 교수</h3>
-							<p>이비인후과</p>
-							<p><span>오전</span> 수,목</p>
-							<p><span>오후</span> 월,화,목</p>
-							<button class="r_btn">진료예약</button>
-						</div>
-					</li>
-					<li>
-						<div class="doc_img"><img src="doctor.png"></div>
-						<div class="doc_info">
-							<h3>김영대 교수</h3>
-							<p>소아과</p>
-							<p><span>오전</span> 월,수,금,토</p>
-							<p><span>오후</span> 월,수</p>
-							<button class="r_btn">진료예약</button>
-						</div>
-					</li>
+<!-- 					<li> -->
+<!-- 						<div class="doc_img"><img src="./image/doctor.png"></div> -->
+<!-- 						<div class="doc_info"> -->
+<!-- 							<h3>김형규 교수</h3> -->
+<!-- 							<p>내과</p> -->
+<!-- 							<p><span>오전</span> 월,수,금,토</p> -->
+<!-- 							<p><span>오후</span> 화,수,금</p> -->
+<!-- 							<button class="r_btn">진료예약</button> -->
+<!-- 						</div> -->
+<!-- 					</li> -->
+<!-- 					<li> -->
+<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
+<!-- 						<div class="doc_info"> -->
+<!-- 							<h3>장미연 교수</h3> -->
+<!-- 							<p>외과</p> -->
+<!-- 							<p><span>오전</span> 수,토</p> -->
+<!-- 							<p><span>오후</span> 월,수,금</p> -->
+<!-- 							<button class="r_btn">진료예약</button> -->
+<!-- 						</div> -->
+<!-- 					</li> -->
+<!-- 					<li> -->
+<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
+<!-- 						<div class="doc_info"> -->
+<!-- 							<h3>이국영 교수</h3> -->
+<!-- 							<p>피부과</p> -->
+<!-- 							<p><span>오전</span> 토,일</p> -->
+<!-- 							<p><span>오후</span> 월,화</p> -->
+<!-- 							<button class="r_btn">진료예약</button> -->
+<!-- 						</div> -->
+<!-- 					</li> -->
+<!-- 					<li> -->
+<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
+<!-- 						<div class="doc_info"> -->
+<!-- 							<h3>은지원 교수</h3> -->
+<!-- 							<p>치과</p> -->
+<!-- 							<p><span>오전</span> 화,수</p> -->
+<!-- 							<p><span>오후</span> 금,토</p> -->
+<!-- 							<button class="r_btn">진료예약</button> -->
+<!-- 						</div> -->
+<!-- 					</li> -->
+<!-- 					<li> -->
+<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
+<!-- 						<div class="doc_info"> -->
+<!-- 							<h3>추승연 교수</h3> -->
+<!-- 							<p>이비인후과</p> -->
+<!-- 							<p><span>오전</span> 수,목</p> -->
+<!-- 							<p><span>오후</span> 월,화,목</p> -->
+<!-- 							<button class="r_btn">진료예약</button> -->
+<!-- 						</div> -->
+<!-- 					</li> -->
+<!-- 					<li> -->
+<!-- 						<div class="doc_img"><img src="doctor.png"></div> -->
+<!-- 						<div class="doc_info"> -->
+<!-- 							<h3>김영대 교수</h3> -->
+<!-- 							<p>소아과</p> -->
+<!-- 							<p><span>오전</span> 월,수,금,토</p> -->
+<!-- 							<p><span>오후</span> 월,수</p> -->
+<!-- 							<button class="r_btn">진료예약</button> -->
+<!-- 						</div> -->
+<!-- 					</li> -->
 				
 				</ul>
 			</div>
