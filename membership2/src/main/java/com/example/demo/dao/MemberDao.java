@@ -21,4 +21,8 @@ public class MemberDao {
 	public int checkRR(HashMap map) {
 		return MemberManager.checkRR(map);
 	}
+	
+	public MemberVo getName(HashMap map) {
+		return MemberManager.getName(map);
+	}
 }

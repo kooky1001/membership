@@ -33,8 +33,9 @@ public class MemberController {
 	//회원등록을 위한 메소드
 	@PostMapping("/insertMember")
 	public ModelAndView insertSubmit(MemberVo m) {
-		ModelAndView mav = new ModelAndView("redirect:/list");
+		ModelAndView mav = new ModelAndView("/joinOk");
 		int re = dao.insert(m);
+		mav.addObject("m", m);
 		mav.addObject("re", re);
 		return mav;
 	}
@@ -64,6 +65,7 @@ public class MemberController {
 	@ResponseBody
 	public HashMap checkRR(@RequestParam HashMap map) {
 		System.out.println(map);
+		map.put("roles", "USER");
 		String rr_check = (String)map.get("rr_check");
 		int already = dao.checkRR(map);
 		
@@ -88,9 +90,35 @@ public class MemberController {
 		return data;
 	}
 	
+	@GetMapping("/checkGuest")
+	public void guestForm() {}
 	
+	@PostMapping("/checkGuest")
+	public ModelAndView guestSubmit(MemberVo m) {
+		ModelAndView mav = new ModelAndView("/joinOk");
+		mav.addObject("m", m);
+		return mav;
+	}
 	
-	
+	@PostMapping("/guestRR")
+	@ResponseBody
+	public HashMap guestRR(@RequestParam HashMap map) {
+		map.put("roles", "GUEST");
+		String rr_check = (String)map.get("rr_check");
+		int already = dao.checkRR(map);
+		
+//		System.out.println(already);
+		
+		String re = CheckRR.check(rr_check);
+		MemberVo mem = dao.getName(map);
+		System.out.println(mem);
+		
+		HashMap data = new HashMap<>();
+		data.put("already",	already);
+		data.put("re", re);
+		data.put("mem", mem);
+		return data;
+	}
 	
 	
 	
@@ -102,7 +130,14 @@ public class MemberController {
 	@GetMapping("/list")
 	public void list() {
 	}
+	@GetMapping("/test")
+	public void test(String ir1) {
+		System.out.println(ir1);
+	}
 	@GetMapping("/join-allow")
 	public void join() {
+	}
+	@GetMapping("/joinOk")
+	public void joinOk() {
 	}
 }

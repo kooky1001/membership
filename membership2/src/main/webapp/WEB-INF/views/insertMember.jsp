@@ -216,7 +216,7 @@ $(function(){
 	//가입버튼을 눌렀을때 적용할 기능
 	$("#btnJoin").click(function(){
 		//아이디를 입력하지 않았을때
-		if($("#id").val() == ""){
+		if($("#id").val().trim() == ""){
 			checkId = true;
 			alert("아이디를 입력해주세요.");
 			return false;
@@ -240,13 +240,13 @@ $(function(){
 		var addr1 = $("#addr1").val();
 		var addr2 = $("#addr2").val();
 		var addr3 = $("#addr3").val();
-		$("#addr").val(addr1+" "+addr2+" "+addr3);
+		$("#addr").val(addr1+"/"+addr2+"/"+addr3);
 
 		
 		var pwd1 = $("#pwd1").val();
 		var pwd2 = $("#pwd2").val();
 		checkPassword(pwd1);
-
+		
 		//비밀번호 정규식 적용여부
 		if(checkP){
 			return false;
@@ -277,13 +277,14 @@ $(function(){
 
 	//아이디 중복확인 버튼을 눌렀을때 동작
 	$("#btnId").click(function(){
-		var id = $("#id").val();
+		var id = $("#id").val().trim();
 
-		if($("#id").val() == ""){
+		if(id == ""){
 			checkId = true;
 			alert("아이디를 입력해주세요.");
 			return false;
 		}
+		
 		$.ajax({ 
 			url :'/checkId', 
 			type : 'post', 

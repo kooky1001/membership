@@ -47,19 +47,20 @@ public class MemberManager {
 	//주민번호 중복확인
 	public static int checkRR(HashMap map) {
 		int n = -1;
+//		System.out.println(map);
 		SqlSession session = sqlSessionFactory.openSession();
 		n = session.selectOne("member.checkRR", map);
 		session.close();
 		return n;
 	}
 	
-	//로그인
-//	public static MemberVo selectMember(String id) {
-//		MemberVo m = null;
-//		SqlSession session = sqlSessionFactory.openSession();
-//		m = session.selectOne("member.selectMember", id);
-//		session.close();
-//		return m;
-//	}
+	//이름을 가져오기
+	public static MemberVo getName(HashMap map) {
+		MemberVo m = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		m = session.selectOne("member.selectByRR", map);
+		session.close();
+		return m;
+	}
 
 }

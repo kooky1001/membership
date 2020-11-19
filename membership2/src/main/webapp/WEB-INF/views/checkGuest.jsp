@@ -224,14 +224,14 @@ $(function(){
 		var rr = rr_no1+"-"+rr_no2;
 
 		$.ajax({
-		    url: "/checkRR",
+		    url: "/guestRR",
 		    method: "POST",
 		    dataType: "text",
 		    async: false,
 		    data: {rr_no:rr, rr_check:rr_no1+rr_no2},
 		    success: function(data) {
 				data = JSON.parse(data);
-				
+				console.log(data);
 			    if(data.already == 0){
 			    	checkAlready = false;
 				}
@@ -263,7 +263,8 @@ $(function(){
 			alert("이미 가입된 주민등록번호입니다.");
 			return false;
 		}
-		
+
+		alert("비회원 인증에 성공하였습니다.");
 	});
 
 	var checkT;
@@ -310,16 +311,15 @@ $(function(){
 <!-- 	                  <a href="/myPage_3"><div id="mypage_box_div2">비밀번호 변경</div></a> -->
 <!-- 	              </div> -->
 		  		<div id="mypage_title">
-		  			<h2>본인 인증</h2>
+		  			<h2>비회원 인증</h2>
 		  		</div>
 		  	<div class="mypage_detail_under">
 		  			<h3>회원님의 개인정보보호와 더욱 안정된 서비스를 위해 최선을 다하겠습니다.</h3>
-				<form action="/checkMember" method="post">
+				<form action="/checkGuest" method="post">
 		  		<div id="mypage_title_sub">
 		  			<div class="tr">
 		  			<strong>이름</strong>
 		  			<span><input type="text" name="name" id="name" required="required" class="pw_input">
-		  			<br><kkk>※ 인증 후 자동으로 이름이 입력됩니다.</kkk>
 		  			</span>
 		  			</div>
 		  			<div class="tr">
@@ -350,6 +350,7 @@ $(function(){
 		  			<strong>인증번호</strong>
 		  			<span><input type="text" name="checkTel" id="checkTel" class="pw_input"></span>
 		  			</div>
+		  			<input type="hidden" name="roles" value="GUEST">
 		  		</div>
 		  		<div id="mypage_title_btn">
 		  			<button class="mypage_title_btn1" id="btnSubmit">확인</button>
