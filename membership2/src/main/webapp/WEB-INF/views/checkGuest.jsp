@@ -315,7 +315,7 @@ $(function(){
 		  		</div>
 		  	<div class="mypage_detail_under">
 		  			<h3>회원님의 개인정보보호와 더욱 안정된 서비스를 위해 최선을 다하겠습니다.</h3>
-				<form action="/checkGuest" method="post">
+				<form action="/insertGuest" method="post">
 		  		<div id="mypage_title_sub">
 		  			<div class="tr">
 		  			<strong>이름</strong>

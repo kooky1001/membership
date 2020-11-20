@@ -8,8 +8,6 @@
 <script src="https://kit.fontawesome.com/eef195c997.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" href="header.css"> -->
-<!-- <link rel="stylesheet" href="newfooter.css"> -->
 <style>
 
 * {
@@ -522,26 +520,87 @@ function doctor(evt, cityName) {
 	}
 </script>
 <script type="text/javascript">
-function showCalendar(y, m) {
-    var text = '<table>\n<tr><td colspan=7 style="text-align:center">';
-    text += '<span onclick="showCalendar('+(y-1)+','+m+')"> Y- </span>';
-    text += '<span onclick="showCalendar('+(m==1?(y-1)+','+12:y+','+(m-1))+')"> M- </span>';
-    text += '[' + y + '/' + ((m < 10) ? ('0' + m) : m) + ']';
-    text += '<span onclick="showCalendar('+(m==12?(y+1)+','+1:y+','+(m+1))+')"> M+ </span>';
-    text += '<span onclick="showCalendar('+(y+1)+','+m+')"> Y+ </span>';
-    text += '</td>';
+// function showCalendar(y, m) {
+//     var text = '<table>\n<tr><td colspan=7 style="text-align:center">';
+//     text += '<span onclick="showCalendar('+(y-1)+','+m+')"> Y- </span>';
+//     text += '<span onclick="showCalendar('+(m==1?(y-1)+','+12:y+','+(m-1))+')"> M- </span>';
+//     text += '[' + y + '/' + ((m < 10) ? ('0' + m) : m) + ']';
+//     text += '<span onclick="showCalendar('+(m==12?(y+1)+','+1:y+','+(m+1))+')"> M+ </span>';
+//     text += '<span onclick="showCalendar('+(y+1)+','+m+')"> Y+ </span>';
+//     text += '</td>';
 
-    var d1 = (y+(y-y%4)/4-(y-y%100)/100+(y-y%400)/400
-          +m*2+(m*5-m*5%9)/9-(m<3?y%4||y%100==0&&y%400?2:3:4))%7;
-    for (i = 0; i < 42; i++) {
-        if (i%7==0) text += '</tr>\n<tr>';
-        if (i < d1 || i >= d1+(m*9-m*9%8)/8%2+(m==2?y%4||y%100==0&&y%400?28:29:30))
-            text += '<td> </td>';
-        else
-            text += '<td' + (i%7 ? '' : ' style="color:red;"') + '>' + (i+1-d1) + '</td>';
-    }
-    document.getElementById('calendarDiv').innerHTML = text + '</tr>\n</table>';
+// 	text += '<tr>';
+// 	text += '<td>일</td>';
+// 	text += '<td>월</td>';
+// 	text += '<td>화</td>';
+// 	text += '<td>수</td>';
+// 	text += '<td>목</td>';
+// 	text += '<td>금</td>';
+// 	text += '<td>토</td>';
+// 	text +=	'</tr>';
+	
+//     var d1 = (y+(y-y%4)/4-(y-y%100)/100+(y-y%400)/400
+//           +m*2+(m*5-m*5%9)/9-(m<3?y%4||y%100==0&&y%400?2:3:4))%7;
+//     for (i = 0; i < 42; i++) {
+//         if (i%7==0) text += '</tr>\n<tr>';
+//         if (i < d1 || i >= d1+(m*9-m*9%8)/8%2+(m==2?y%4||y%100==0&&y%400?28:29:30))
+//             text += '<td> </td>';
+//         else
+//             text += '<td' + (i%7 ? '' : ' style="color:red;"') + '>' + (i+1-d1) + '</td>';
+//     }
+//     document.getElementById('calendarDiv').innerHTML = text + '</tr>\n</table>';
+// }
+
+function calenderAppend(calendarList){
+	var html = "";
+	var roomNo = $('#roomReserveNo').val();
+	var notThisMonthColor="#BDBDBD";
+	var sundayColor="#FF0000";
+	var weekdayColor="#000000";
+	var saturdayColor="#0000FF";
+	$.each(calendarList,function(key, item) {
+        if(key%7==0){
+			 html+= "<tr class='fc-week'>";
+		}
+		html+= "<td class='fc-day fc-widget-content'>";
+		html+= "<div style='min-height: 80px;'>";
+		html+= "<div class='fc-day-number' style='color:"
+		//해당일수가 현재월에 포함되지않으면 색깔변경
+        if(item.day > (key+1) || (key-item.day) > 27){
+			html+=notThisMonthColor;
+		}else{
+            //요일에따른 색깔변경
+			if(key%7==0){
+				html+= sundayColor;
+			}else if((key%7)>0 && (key%7)<6){
+				html+= weekdayColor;
+			}else if(key%7==6){
+				html+= saturdayColor;
+			}
+		}
+		html+=";font-weight:bold;'>"+item.day;
+		html+="</div>";
+		html+= "<div class='fc-day-content'>";
+        //일수가 index+1보다 작거나같고 두 수의 차이가 27일보다 작으면..
+		if(item.day <=(key+1) && (key-item.day)<27){
+			if(item.reserveVo != null){
+				html+="<h5 style='color:#FF0000;'>예약중</h5>";
+			}else{
+                //예약중이면 예약정보를 보여준다
+				html+="<button type='button' class='btn btn-default'>예약</button>";
+			}
+		}
+		html+= "<div style='position: relative; height: 25px;'></div>";
+		html+= "</div>";
+		html+= "</div>";
+		html+= "</td>";
+		if(key%7==6){
+			 html+= "</tr>";
+		}
+	});
+	return html;
 }
+
 
 $(function(){
 	
@@ -756,7 +815,7 @@ $(function(){
 		<div class="m3_2">
 			<h3>진료일정</h3>
 			<div class="calendar">
-				<body onload="showCalendar(2020,10)">
+				<body onload="calenderAppend">
 				<div id="calendarDiv" style= "font-weight:bold;font-size:15pt;"></div>
 			</div>
 			<div class="confirmation_btn">

@@ -101,6 +101,12 @@ $(function(){
 		alert("login");
 // 		location.href="/login";
 	});
+
+	if ($("#sp").val() == "회원"){
+		var text = "모든 회원가입절차가 완료되었습니다.<br>로그인 후 모든 서비스를 이용할 수 있습니다."
+		var sp = $("<span></span>").html(text);
+		$("#mimg").append(sp);
+	}
 });
 </script>
 </head>
@@ -131,22 +137,18 @@ $(function(){
      	<!-- 메인부분 -->
   		<div class="column middle">
 			<div id="title">
-				<h1>회원가입</h1>
+				<h1>${msg }가입</h1>
 			</div>
-			
 			
 			
 			<div id="main">
 				<div id="mimg">
 					<img alt="" src="./image/select.jpg" width="100" height="100">
-					<p>회원가입이 완료되었습니다.</p>
-					<span>
-					모든 회원가입절차가 완료되었습니다.<br>
-					로그인 후 모든 서비스를 이용할 수 있습니다.
-					</span>
+					<p>${msg }가입이 완료되었습니다.</p>
+					<input type="hidden" id="sp" value="${msg }">
 				</div>
 				<div class="mtitle">
-					<h2>회원정보</h2>
+					<h2>${msg }정보</h2>
 				</div>
 				<div class="mmain">
 					<table>

@@ -14,6 +14,10 @@ public class MemberDao {
 		return MemberManager.insert(m);
 	}
 	
+	public int insertGuest(MemberVo m) {
+		return MemberManager.insertGuest(m);
+	}
+	
 	public int checkId(HashMap map) {
 		return MemberManager.checkId(map);
 	}
@@ -25,4 +29,6 @@ public class MemberDao {
 	public MemberVo getName(HashMap map) {
 		return MemberManager.getName(map);
 	}
+	
+	
 }

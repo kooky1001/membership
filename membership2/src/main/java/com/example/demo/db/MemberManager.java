@@ -35,6 +35,15 @@ public class MemberManager {
 		return re;
 	}
 	
+	//비회원가입
+	public static int insertGuest(MemberVo m) {
+		int re = -1;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		re = session.insert("member.insertGuest", m);
+		session.close();
+		return re;
+	}
+	
 	//아이디 중복확인
 	public static int checkId(HashMap map) {
 		int n = -1;

@@ -37,6 +37,18 @@ public class MemberController {
 		int re = dao.insert(m);
 		mav.addObject("m", m);
 		mav.addObject("re", re);
+		mav.addObject("msg", "회원");
+		return mav;
+	}
+	
+	//회원등록을 위한 메소드
+	@PostMapping("/insertGuest")
+	public ModelAndView insertGuest(MemberVo m) {
+		ModelAndView mav = new ModelAndView("/joinOk");
+		int re = dao.insert(m);
+		mav.addObject("m", m);
+		mav.addObject("re", re);
+		mav.addObject("msg", "비회원");
 		return mav;
 	}
 	

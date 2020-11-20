@@ -20,4 +20,8 @@
   	insert into member values(seq_mem.nextval,#{id},#{pwd},#{name},#{rr_no},#{tel},#{email},#{addr},#{roles},#{emailReceive},#{smsReceive})
   </insert>
   
+  <insert id="insertGuest">  
+  	insert into member values(seq_mem.nextval,null,null,#{name},#{rr_no},#{tel},null,null,#{roles},null,null)
+  </insert>
+  
 </mapper>
